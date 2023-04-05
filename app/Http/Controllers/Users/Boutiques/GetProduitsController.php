@@ -24,9 +24,9 @@ class GetProduitsController extends Controller
     /*
         fonction pour voir un unique produit
     */
-    public function showOneProduits($slug)
+    public function showOneProduits($nom_produit)
     {
-        $produits = Produits::with('images')->where('nom_produit', $slug)->firstOrFail();
+        $produits = Produits::with('images')->where('nom_produit', $nom_produit)->firstOrFail();
         
         if(!$produits){
             return response()->json(['message' => "erreur"], 403); 
