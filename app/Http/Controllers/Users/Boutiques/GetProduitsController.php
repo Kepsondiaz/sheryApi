@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 
 class GetProduitsController extends Controller
 {
-    //function pour récuperer les produits
+    /*
+        function pour récuperer tout les produits
+    */
     public function showProduits()
     {
         $produits = Produits::with('images')->get();
@@ -18,15 +20,20 @@ class GetProduitsController extends Controller
         }
         return response()->json(['message' => $produits], 200);
     }
-
-    public function showOneProduits($id)
+    
+    /*
+        fonction pour voir un unique produit
+    */
+    public function showOneProduits($slug)
     {
-        $produits = Produits::with('images')->where('id', $id)->firstOrFail();
+        $produits = Produits::with('images')->where('nom_produit', $slug)->firstOrFail();
         
         if(!$produits){
             return response()->json(['message' => "erreur"], 403); 
         }
         return response()->json(['message' => $produits], 200);
     }
+
+    
     
 } 
