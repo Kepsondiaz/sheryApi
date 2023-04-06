@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Paniers extends Model
+class ProduitsUsers extends Pivot
 {
     use HasFactory;
     protected $fillable = [
-        'id_produit'
+        'quantite'
     ];
 }

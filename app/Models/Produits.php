@@ -23,4 +23,7 @@ class Produits extends Model
     public function Commandes(){
         return $this->belongsToMany(Commandes::class); 
     }
+    public function User(){
+        return $this->belongsToMany(User::class, 'produits_users', 'user_id', 'produit_id');
+    }
 }
