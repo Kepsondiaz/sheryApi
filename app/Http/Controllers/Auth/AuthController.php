@@ -40,8 +40,9 @@ class AuthController extends Controller
             ], 200);
     }
 
-    //login user
-
+    /*
+        login user
+    */
     public function loginUser(Request $request)
     {
             $validateUser = Validator::make($request->all(), 
@@ -70,7 +71,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                'token' => $user->createToken("SHERY TOKEN")->plainTextToken
             ], 200);
     }
 }
