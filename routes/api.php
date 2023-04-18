@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\Boutiques\ProduitsController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Users\Boutiques\CommandeController;
 use App\Http\Controllers\Users\Boutiques\GetProduitsController;
+use App\Http\Controllers\Users\Boutiques\PaniersController;
+use App\Models\Paniers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,11 +24,25 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::post('/auth/register', [AuthController::class, 'createUser']);
+Route::post('/auth/login', [AuthController::class, 'loginUser']);
 
-// route concernant les actions faites par les administrateurs
+
+/*
+    route concernant les produits côté admin et utilisateur 
+*/
 Route::post('/add-produits',[ProduitsController::class, 'addProduits']);
-
-
-// route concernant les actions faites par les utilisateurs
 Route::get('/voir-produits',[GetProduitsController::class, 'showProduits']);
-Route::get('/voir-produits/{id}',[GetProduitsController::class, 'showOneProduits']);
+Route::get('/voir-produits/{nom}',[GetProduitsController::class, 'showOneProduits']);
+
+/*
+    route concernant l'ajout de produit sur le panier 
+*/
+Route::post('/add-panier', [PaniersController::class, 'addPanier'])->middleware('auth:sanctum');
+Route::get('/voir-panier', [PaniersController::class, 'voirPanier'])->middleware('auth:sanctum');
+
+/*
+    route concernant les commandes d'un utilisateur 
+*/
+Route::post('/valider-commandes', [CommandeController::class, 'validerCommandes'])->middleware('auth:sanctum');
+// Route::get('/voir-panier', [PaniersController::class, 'voirPanier'])->middleware('auth:sanctum');
