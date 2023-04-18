@@ -24,6 +24,6 @@ class Produits extends Model
         return $this->belongsToMany(Commandes::class); 
     }
     public function User(){
-        return $this->belongsToMany(User::class, 'produits_users', 'user_id', 'produit_id');
+        return $this->belongsToMany(User::class, 'produits_users', 'user_id', 'produit_id')->withPivot('quantite_commande');
     }
 }
