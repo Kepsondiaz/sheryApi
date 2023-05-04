@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\Blog\CreateArticleController;
 use App\Http\Controllers\Admin\Boutiques\ProduitsController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Users\Blog\GetArticleController;
 use App\Http\Controllers\Users\Boutiques\CommandeController;
 use App\Http\Controllers\Users\Boutiques\GetProduitsController;
 use App\Http\Controllers\Users\Boutiques\PaniersController;
@@ -46,3 +48,16 @@ Route::get('/voir-panier', [PaniersController::class, 'voirPanier'])->middleware
 */
 Route::post('/valider-commandes', [CommandeController::class, 'validerCommandes'])->middleware('auth:sanctum');
 // Route::get('/voir-panier', [PaniersController::class, 'voirPanier'])->middleware('auth:sanctum');
+
+
+/**
+ * routes concernant le blog
+ */
+
+Route::prefix('blog')->group(function() {
+    
+    Route::post('creer-articles', [CreateArticleController::class, 'creerArticles']);
+    Route::get('voir-articles', [GetArticleController::class, 'voirArticles']);
+    Route::get('voir-articles/{id}', [GetArticleController::class, 'voirUnArticle']);
+});
+
